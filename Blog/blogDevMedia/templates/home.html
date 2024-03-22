@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    
+    {% for postagem in postagens %}
+        <div class="collection">
+            <a href="{% url 'post' id=postagem.id %} "  class="collection-item">{{postagem.titulo}}</a>
+        </div>
+    {% endfor %}
+
+{% endblock conteudo %}
