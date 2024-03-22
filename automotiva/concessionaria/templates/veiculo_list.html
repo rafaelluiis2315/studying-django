@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    Listagem de Veículos
+{% endblock title %}
+
+{% block content %}
+    <div class="d-flex my-4 justify-content-evenly">
+        <form method="get" class="col-5">
+            <div class="input-group">
+                <input type="text" class="form-control" name="busca" placeholder="Buscar veiculo">
+                <button class="btn btn-primary" type="submit">
+                <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+        <form method="get" class="col-3">
+            <div class="input-group" >
+                <label for="ordenar" class="input-group-text">Ordenar por</label>
+                {% with cat=request.GET.ordenar %}
+                    <select name="ordenar" class="form-select form-select-sm" onchange="this.form.submit()">
+                        <option value="" {% if cat == '' %}selected{% endif %}>
+                            ----
+                        </option>
+                        <option value="-preco" {% if cat == '-preco' %}selected{% endif %}>
+                            Maiores Preços
+                        </option>
+                        <option value="preco" {% if cat == 'preco' %} selected {% endif %}>
+                            Menores Preços
+                        </option>
+                        <option {% if cat == 'ano' %} selected {% endif %} value="ano">
+                            Mais antigos</option>
+                        <option {% if cat == '-ano' %} selected {% endif %} value="-ano">
+                            Mais novos
+                        </option>
+                    </select>
+                {% endwith %}
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        {% for veiculo in veiculos %}
+            <div class="col-md-4">
+                <div class="img-thumbnail">
+                    <a href="{% url 'perfil_veiculo' id=veiculo.id %}" style="text-decoration: none;">
+                        <img src="{{veiculo.foto_capa.url}}" style="width:400px; height:225px;">
+                        <div class="link-dark li">
+                            <p>{{veiculo.modelo}} - {{veiculo.ano}} - R${{veiculo.preco|intcomma}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination mt-4 justify-content-center">
+        <span class="step-links">
+            {% if veiculos.has_previous %}
+                <a href="?page={{ veiculos.previous_page_number }}">anterior</a>
+            {% endif %}
+            <span class="current">
+                Página {{ veiculos.number }} de {{ veiculos.paginator.num_pages }}.
+            </span>
+            {% if veiculos.has_next %}
+                <a href="?page={{ veiculos.next_page_number }}">próxima</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock content %}
