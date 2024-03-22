@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>lista de pessoas</title>
+{% endblock %}
+
+
+{% block content %}
+
+    {% for pessoa in pessoas %}
+        <p>{{pessoa}}</p>
+    {% endfor %}
+
+{% endblock content %}
