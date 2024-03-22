@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block tituloPagina %}
+    Remoção de Marcas
+{% endblock tituloPagina %}
+
+{% block content %}
+    <div class="col-8 mt-5">
+        <form method="post">{% csrf_token %}
+            <h4>Tem certeza que deseja excluir a marca "{{ marca.nome }}"?</h4>
+            <br/>
+            <button type="submit" class="btn btn-primary">
+                Remover
+            </button>
+        </form>
+    </div>
+{% endblock content %}
