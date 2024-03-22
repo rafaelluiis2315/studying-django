@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Loja de carros</title>
+</head>
+<body>
+    {% if brand_list %}
+        <h1>Bem vindo a Loja de carros de Rafael :) </h1>
+        <br><br>
+        <h2>Essas são as marcas disponiveis</h2>
+        <ol>
+            {% for brand in brand_list %}
+                <li><a href="/carrinho/{{ brand.id }}/">{{ brand.brand_name }}</a></li>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p>No polls are available.</p>
+    {% endif %}
+
+</body>
+</html>

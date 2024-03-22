@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ brand.brand_name}}</title>
+</head>
+<body>
+    <h1> {{ brand.brand_name}} </h1>
+    <ul>
+        {% for car in brand.car_set.all%}
+            <li>
+                <span>{{ car.car_name}}</span>
+                <span> R$ {{ car.value_car }} </span>
+            </li>
+        
+        {% endfor%}
+    </ul>
+</body>
+</html>
